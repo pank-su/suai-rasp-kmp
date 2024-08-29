@@ -38,6 +38,11 @@ class SuaiRaspClientBuilder{
     var basicUrl = "https://api.guap.ru/rasp/custom"
 }
 
+/**
+ * Создать объект клиента расписания с настройками выбранного движка для ktor и ссылки для расписания
+ * @see SuaiRaspClient
+ * @see SuaiRaspClientBuilder
+ */
 fun createSuaiRaspClient(init: SuaiRaspClientBuilder.() -> Unit ): SuaiRaspClient {
     val builder = SuaiRaspClientBuilder().also(init)
     return SuaiRaspClient(builder.engine, builder.basicUrl)
