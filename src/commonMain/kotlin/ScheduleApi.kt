@@ -1,4 +1,6 @@
-class ScheduleApi(private val client: Client) {
+class ScheduleApi(private val client: SuaiRaspClient) {
+
+
     fun byGroup(groupId: Int) {
         TODO()
     }
@@ -11,7 +13,7 @@ class ScheduleApi(private val client: Client) {
         TODO()
     }
 
-    operator fun get(groupId: Int) {}
+    operator fun get(groupId: Int) { }
 
     operator fun get(groupId: Int, professorId: Int) {}
 

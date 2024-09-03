@@ -13,11 +13,16 @@ kotlin{
             dependencies {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.serialization.json)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
             }
         }
         commonTest{
             dependencies{
                 implementation(libs.ktor.client.mock)
+                implementation(kotlin("test"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC.2")
             }
         }
     }
