@@ -1,3 +1,4 @@
+import entity.Teacher
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.*
@@ -6,10 +7,11 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import models.Info
+import models.TeacherDTO
 
-class SuaiRaspClient internal constructor(engine: HttpClientEngine?, val basicUrl: String) {
+class SuaiRaspClient internal constructor(engine: HttpClientEngine?, internal val basicUrl: String) {
 
-    private val client = (if (engine == null) HttpClient() {
+    internal val client = (if (engine == null) HttpClient() {
         setUp()
     } else HttpClient(engine) {
         setUp()
@@ -21,7 +23,7 @@ class SuaiRaspClient internal constructor(engine: HttpClientEngine?, val basicUr
         }
     }
 
-    val schedule = lazy {
+    val schedule by lazy {
         ScheduleApi(this)
     }
 
@@ -39,20 +41,22 @@ class SuaiRaspClient internal constructor(engine: HttpClientEngine?, val basicUr
     }
 
     suspend fun info(): Info =
-        client.get(""){
-            url{
+        client.get(basicUrl) {
+            url {
                 this.appendPathSegments("get-sem-info")
             }
         }.body<Info>()
-    
+
 
     suspend fun version() {
         TODO()
     }
 
-    suspend fun teachers(page: Int = 1, pageSize: Int = 50) {
-        TODO()
-    }
+    suspend fun teachers(): List<Teacher> = client.get(basicUrl) {
+        url {
+            this.appendPathSegments("get-sem-preps")
+        }
+    }.body<List<TeacherDTO>>().map { it.toTeacher(this) }
 
     suspend fun builds() {
         TODO()

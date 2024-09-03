@@ -1,21 +1,30 @@
-class ScheduleApi(private val client: SuaiRaspClient) {
+import entity.Teacher
+import io.ktor.client.request.*
+
+class ScheduleApi(private val suaiClient: SuaiRaspClient) {
 
 
-    fun byGroup(groupId: Int) {
+    suspend fun byGroup(groupId: Int) {
         TODO()
     }
 
-    fun byProfessor(professorId: Int) {
-        TODO()
+    suspend fun byTeacher(teacherId: Int) {
+        suaiClient.client.get(suaiClient.basicUrl){
+
+        }
     }
+
+    suspend fun byTeacher(teacher: Teacher) = byTeacher(teacher.id)
 
     fun byGroupAndProfessor(groupId: Int, professorId: Int) {
         TODO()
     }
 
-    operator fun get(groupId: Int) { }
+    suspend operator fun invoke(groupId: Int, professorId: Int? = null) {
+        if (professorId == null){
 
-    operator fun get(groupId: Int, professorId: Int) {}
-
-    operator fun invoke(groupId: Int, professorId: Int? = null) {}
+        }else{
+            
+        }
+    }
 }
