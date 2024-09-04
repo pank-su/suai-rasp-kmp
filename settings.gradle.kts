@@ -1,6 +1,3 @@
-
-rootProject.name = "rasp-api"
-
 pluginManagement {
     repositories {
         google()
@@ -15,3 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+rootProject.name = "rasp-api"
+include(":suai-schedule")
