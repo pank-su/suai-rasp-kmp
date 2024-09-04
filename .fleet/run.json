@@ -1,5 +1,16 @@
 {
     "configurations": [
         
+
+        {
+            "name": "cli info",
+            "type": "gradle",
+            "workingDir": "$PROJECT_DIR$",
+            "tasks": ["jvmRun"],
+            "args": ["-DmainClass=MainKt", "--quiet", "-p", "$PROJECT_DIR$/example/", "--args=\"info\""],
+            "initScripts": {
+                "flmapper": "ext.mapPath = { path -> path }"
+            }
+        }
     ]
 }
