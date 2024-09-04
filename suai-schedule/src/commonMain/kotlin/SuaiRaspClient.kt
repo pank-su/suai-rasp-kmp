@@ -1,3 +1,4 @@
+import entity.Group
 import entity.Teacher
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -6,6 +7,7 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import models.GroupDTO
 import models.Info
 import models.TeacherDTO
 
@@ -27,9 +29,11 @@ class SuaiRaspClient internal constructor(engine: HttpClientEngine?, internal va
         ScheduleApi(this)
     }
 
-    suspend fun groups() {
-        TODO()
-    }
+    suspend fun groups(): List<Group> = client.get(basicUrl) {
+        url {
+            this.appendPathSegments("get-sem-groups")
+        }
+    }.body<List<GroupDTO>>().map { it.toGroup(this) }
 
     suspend fun directions() {
         TODO()

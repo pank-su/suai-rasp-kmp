@@ -7,7 +7,5 @@ class Group(val id: Int, val name: String, private val suaiRaspClient: SuaiRaspC
     /**
      * Получение расписание по группе
      */
-    suspend fun schedule(){
-        
-    }
+    suspend fun schedule() = suaiRaspClient.schedule(id)
 }
